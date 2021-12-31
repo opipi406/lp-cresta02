@@ -1,0 +1,63 @@
+/*****************************************************/
+/*  ハンバーガーメニュー
+/*****************************************************/
+@import "variables";
+@import "media-query";
+
+$menu-size: 34px;
+$color-text: $color-white;
+
+.burger-menu {
+    position: relative;
+    width: $menu-size;
+    height: $menu-size;
+
+    z-index: 100;
+
+    @include mq-up(md) {
+        display: none;
+    }
+
+    &__lines {
+        z-index: 100;
+        position: relative;
+
+        display: block;
+
+        width: 100%;
+        height: 4px;
+
+        transition: .15s cubic-bezier(0.33, 1, 0.68, 1);
+
+        background-color: white;
+        background-color: $color-text;
+
+        &::before,
+        &::after {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            content: "";
+            transition: .3s cubic-bezier(0.33, 1, 0.68, 1);
+
+            background-color: $color-text;
+        }
+        &::before {
+            transform: translateY(-$menu-size / 3);
+        }
+        &::after {
+            transform: translateY($menu-size / 3);
+        }
+        &.open {
+            background-color: transparent;
+            &::before {
+                transform: rotate(-45deg);
+            }
+            &::after {
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
